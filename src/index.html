@@ -4,9 +4,29 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>Leaderboard</title>
 </head>
 <body>
-  <h1>Hello world!</h1>
+    <h1>Leaderboard</h1>
+  <main> 
+    <section>
+      <div>
+        <h2>Recent scores</h2>
+        <button id="refresh">Refresh</button>
+      </div>
+      <table id="scores"></table>
+    </section>
+
+    <section>
+      <h2>Add your score</h2>
+      <form>
+        <input id="your-name" type="text" placeholder="Your name">
+        <input id="your-score" type="number" placeholder="Your score">
+        <button id="submit">Submit</button>
+      </form>
+    </section>
+  </main>
+  <script type="module" src="index.js"></script>
 </body>
 </html>
