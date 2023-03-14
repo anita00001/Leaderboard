@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  width: 90%;
+  font-size: 3.5rem;
+  margin: 3rem auto 0;
+}
+
+main {
+  display: flex;
+}
+
+section {
+  width: 40%;
+  margin: 3rem auto;
+}
+
+div {
+  display: flex;
+  justify-content: space-between;
+}
+
+h2 {
+  margin: 2rem 0;
+  font-size: 2rem;
+}
+
+#refresh {
+  margin: 2rem 0;
+  padding: 0.5rem;
+}
+
+table {
+  width: 100%;
+  border: 3px solid black;
+  border-collapse: collapse;
+}
+
+tr:nth-child(even) {
+  background-color: rgb(180, 176, 176);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  width: 90%;
+  padding: 0.5rem 1rem;
+  border: 3px solid black;
+  margin-bottom: 1rem;
+}
+
+#submit {
+  padding: 0.5rem 1rem;
+  width: fit-content;
+  align-self: flex-end;
+  margin-right: 3%;
+}
+
+button {
+  box-shadow: 3px 3px 5px rgba(0, 0, 0);
+}
