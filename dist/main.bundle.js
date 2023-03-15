@@ -1,3 +1,4 @@
+"use strict";
 /*
  * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
  * This devtool is neither made for production nor for readable output files.
@@ -6,9 +7,7 @@
  * or disable the default devtool with "devtool: false".
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ({
+(self["webpackChunkleaderboard"] = self["webpackChunkleaderboard"] || []).push([["main"],{
 
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/style.css":
 /*!*************************************************************!*\
@@ -116,7 +115,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _modules_add_score_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/add-score.js */ \"./src/modules/add-score.js\");\n/* harmony import */ var _modules_local_storage_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/local-storage.js */ \"./src/modules/local-storage.js\");\n// index.js\n\n\n\n\nconst submitButton = document.getElementById('submit');\nconst table = document.getElementById('scores');\nconst yourName = document.getElementById('your-name');\nconst yourScore = document.getElementById('your-score');\n\nlet leaderBoard = (0,_modules_local_storage_js__WEBPACK_IMPORTED_MODULE_2__.getFromStorage)();\n\nleaderBoard = [\n  {\n    name: 'Anita',\n    score: 90,\n  },\n  {\n    name: 'Raj',\n    score: 100,\n  },\n  {\n    name: 'Yog',\n    score: 80,\n  },\n];\n\nconst showScore = () => {\n  (0,_modules_local_storage_js__WEBPACK_IMPORTED_MODULE_2__.updateStorage)(leaderBoard);\n  leaderBoard.sort((a, b) => b.score - a.score);\n  table.innerHTML = '';\n  leaderBoard.forEach((item) => {\n    const tr = document.createElement('tr');\n    tr.innerHTML = `\n    <td>${item.name}</td>\n    <td>:</td>\n    <td>${item.score}</td>`;\n    table.appendChild(tr);\n  });\n};\n\nshowScore();\n\nsubmitButton.addEventListener('click', (e) => {\n  e.preventDefault();\n  leaderBoard = (0,_modules_add_score_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(yourName.value, yourScore.value, leaderBoard);\n  (0,_modules_local_storage_js__WEBPACK_IMPORTED_MODULE_2__.updateStorage)(leaderBoard);\n  showScore();\n  yourName.value = '';\n  yourScore.value = '';\n});\n\n//# sourceURL=webpack://leaderboard/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _modules_add_score_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/add-score.js */ \"./src/modules/add-score.js\");\n\n\n\nconst refresh = document.getElementById('refresh');\nconst submitButton = document.getElementById('submit');\nconst table = document.getElementById('scores');\nconst yourName = document.getElementById('your-name');\nconst yourScore = document.getElementById('your-score');\n\nconst url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/V4nBNcUDAwYdX0EPGSQ0/scores';\n\nconst showScore = async () => {\n  table.innerHTML = '';\n\n  await fetch(url)\n    .then((response) => response.json())\n    .then((json) => {\n      const scores = json.result;\n\n      scores.forEach((item) => {\n        const tr = document.createElement('tr');\n        tr.innerHTML = `\n      <td>${item.user}</td>\n      <td>:</td>\n      <td>${item.score}</td>`;\n        table.appendChild(tr);\n      });\n    });\n};\n\nrefresh.addEventListener('click', () => {\n  showScore();\n});\n\nsubmitButton.addEventListener('click', (e) => {\n  e.preventDefault();\n  (0,_modules_add_score_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(url, yourName.value, yourScore.value);\n  showScore();\n  yourName.value = '';\n  yourScore.value = '';\n});\n\nshowScore();\n\n//# sourceURL=webpack://leaderboard/./src/index.js?");
 
 /***/ }),
 
@@ -126,98 +125,13 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sty
   \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n// add-score.js\nconst addScore = (name, score, leaderBoard) => {\n  const updateLeaderBoard = {\n    name,\n    score,\n  };\n  leaderBoard.push(updateLeaderBoard);\n  return leaderBoard;\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (addScore);\n\n//# sourceURL=webpack://leaderboard/./src/modules/add-score.js?");
-
-/***/ }),
-
-/***/ "./src/modules/local-storage.js":
-/*!**************************************!*\
-  !*** ./src/modules/local-storage.js ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"getFromStorage\": () => (/* binding */ getFromStorage),\n/* harmony export */   \"updateStorage\": () => (/* binding */ updateStorage)\n/* harmony export */ });\n// localstorage.js\nconst getFromStorage = () => {\n  let storedData = JSON.parse(window.localStorage.getItem('Leaderboard-scores'));\n  storedData = Array.isArray(storedData) ? storedData : [];\n  return storedData;\n};\n\nconst updateStorage = (data) => {\n  window.localStorage.setItem('Leaderboard-scores', JSON.stringify(data));\n};\n\n\n\n//# sourceURL=webpack://leaderboard/./src/modules/local-storage.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst addScore = async (url, name, score) => {\n  await fetch(url, {\n    method: 'POST',\n    body: JSON.stringify({\n      user: name,\n      score,\n    }),\n    headers: {\n      'Content-type': 'application/json; charset=UTF-8',\n    },\n  }).then((response) => response.json());\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (addScore);\n\n//# sourceURL=webpack://leaderboard/./src/modules/add-score.js?");
 
 /***/ })
 
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			id: moduleId,
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/nonce */
-/******/ 	(() => {
-/******/ 		__webpack_require__.nc = undefined;
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
-/******/ 	
-/******/ })()
-;
+},
+/******/ __webpack_require__ => { // webpackRuntimeModules
+/******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+/******/ var __webpack_exports__ = (__webpack_exec__("./src/index.js"));
+/******/ }
+]);
