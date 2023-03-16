@@ -1,4 +1,4 @@
-import './style.css';
+// import './style.css';
 import addScore from './modules/add-score.js';
 
 const refresh = document.getElementById('refresh');
@@ -16,13 +16,13 @@ const showScore = async () => {
     .then((response) => response.json())
     .then((json) => {
       const scores = json.result;
-
+      // Can add sort function to sort score in descending order
       scores.forEach((item) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-      <td>${item.user}</td>
-      <td>:</td>
-      <td>${item.score}</td>`;
+          <td>${item.user}</td>
+          <td>:</td>
+          <td>${item.score}</td>`;
         table.appendChild(tr);
       });
     });
